@@ -93,6 +93,54 @@ except TokenError as e:
     print(f"トークンエラー: {e}")
 ```
 
+### コマンドラインエントリーポイント
+
+このライブラリはコマンドラインから直接実行可能なエントリーポイントを提供しています。
+
+#### 基本的な使用方法
+
+```bash
+# 環境変数から認証情報を読み込む
+export FORTYTWO_CLIENT_ID=your_client_id
+export FORTYTWO_CLIENT_SECRET=your_client_secret
+python -m auth42.main
+
+# コマンドライン引数で認証情報を指定
+python -m auth42.main --client-id your_client_id --client-secret your_client_secret
+
+# トークン情報を取得して表示
+python -m auth42.main --client-id your_client_id --client-secret your_client_secret --token-info
+
+# 強制的に新しいトークンを取得
+python -m auth42.main --client-id your_client_id --client-secret your_client_secret --force-refresh
+```
+
+#### オプション
+
+- `--client-id`: 42 APIのクライアントID（環境変数 `FORTYTWO_CLIENT_ID`, `UID`, `CLIENT_ID` からも取得可能）
+- `--client-secret`: 42 APIのクライアントシークレット（環境変数 `FORTYTWO_CLIENT_SECRET`, `SECRET`, `CLIENT_SECRET` からも取得可能）
+- `--token-file`: トークンファイルのパス（環境変数 `TOKEN_FILE` からも取得可能）
+- `--token-info`: トークン情報を取得して表示
+- `--force-refresh`: 強制的に新しいトークンを取得
+
+#### ヘルプの表示
+
+```bash
+python -m auth42.main --help
+```
+
+#### パッケージインストール後の使用
+
+パッケージをインストールすると、`auth42`コマンドが直接使用可能になります：
+
+```bash
+# パッケージをインストール
+pip install -e .
+
+# コマンドラインから直接実行
+auth42 --client-id your_client_id --client-secret your_client_secret --token-info
+```
+
 ## APIリファレンス
 
 ### Auth42
@@ -146,11 +194,12 @@ except TokenError as e:
 ## モジュール構造
 
 ```
-auth/
+auth42/
 ├── __init__.py          # パブリックAPIのエクスポート
 ├── exceptions.py        # 例外クラス
 ├── token.py            # TokenInfoとTokenManager
 ├── client.py           # Auth42認証クライアント
+├── main.py             # コマンドラインエントリーポイント
 ├── pyproject.toml      # パッケージ設定
 └── README.md           # このファイル
 ```

@@ -20,5 +20,8 @@ dev = [
     "ruff>=0.14.2",
 ]
 
+[project.scripts]
+auth42 = "auth42.main:main"
+
 [tool.hatch.build.targets.wheel]
-packages = ["src/auth"]
+packages = ["auth42"]
