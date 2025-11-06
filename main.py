@@ -18,8 +18,8 @@ def main():
         epilog="""
 使用例:
   # 環境変数から認証情報を読み込む
-  export FORTYTWO_CLIENT_ID=your_client_id
-  export FORTYTWO_CLIENT_SECRET=your_client_secret
+  export FT_UID=your_client_id
+  export FT_SECRET=your_client_secret
   python -m auth42.main
 
   # コマンドライン引数で認証情報を指定
@@ -34,13 +34,13 @@ def main():
         "--client-id",
         type=str,
         default=None,
-        help="42 APIのクライアントID（環境変数 FORTYTWO_CLIENT_ID, UID, CLIENT_ID からも取得可能）",
+        help="42 APIのクライアントID（環境変数 FT_UID からも取得可能）",
     )
     parser.add_argument(
         "--client-secret",
         type=str,
         default=None,
-        help="42 APIのクライアントシークレット（環境変数 FORTYTWO_CLIENT_SECRET, SECRET, CLIENT_SECRET からも取得可能）",
+        help="42 APIのクライアントシークレット（環境変数 FT_SECRET からも取得可能）",
     )
     parser.add_argument(
         "--token-file",

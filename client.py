@@ -41,27 +41,16 @@ class Auth42:
         self.base_url = base_url or self.BASE_URL
         self.token_manager = token_manager or TokenManager()
 
-        # 環境変数から取得（複数の名前をサポート）
-        self.client_id = (
-            client_id
-            or os.getenv("FORTYTWO_CLIENT_ID")
-            or os.getenv("UID")
-            or os.getenv("CLIENT_ID")
-        )
-        self.client_secret = (
-            client_secret
-            or os.getenv("FORTYTWO_CLIENT_SECRET")
-            or os.getenv("SECRET")
-            or os.getenv("CLIENT_SECRET")
-        )
+        # 環境変数から取得
+        self.client_id = client_id or os.getenv("FT_UID")
+        self.client_secret = client_secret or os.getenv("FT_SECRET")
 
         if not self.client_id or not self.client_secret:
             raise ValueError(
                 "client_id と client_secret が必要です。\n"
-                "環境変数を以下のいずれかで設定してください:\n"
-                "- FORTYTWO_CLIENT_ID / FORTYTWO_CLIENT_SECRET\n"
-                "- UID / SECRET\n"
-                "- CLIENT_ID / CLIENT_SECRET"
+                "環境変数を以下のように設定してください:\n"
+                "- FT_UID: 42 APIのクライアントID\n"
+                "- FT_SECRET: 42 APIのクライアントシークレット"
             )
 
     def get_token(self, force_refresh: bool = False) -> str:

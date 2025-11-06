@@ -53,16 +53,16 @@ headers = auth.get_headers()
 
 ```python
 import os
-os.environ["FORTYTWO_CLIENT_ID"] = "your_client_id"
-os.environ["FORTYTWO_CLIENT_SECRET"] = "your_client_secret"
+os.environ["FT_UID"] = "your_client_id"
+os.environ["FT_SECRET"] = "your_client_secret"
 
 # 環境変数から自動的に読み込まれる
 auth = Auth42()
 ```
 
 サポートされている環境変数:
-- `FORTYTWO_CLIENT_ID` / `UID` / `CLIENT_ID`
-- `FORTYTWO_CLIENT_SECRET` / `SECRET` / `CLIENT_SECRET`
+- `FT_UID`: 42 APIのクライアントID
+- `FT_SECRET`: 42 APIのクライアントシークレット
 
 ### カスタムトークンマネージャーの使用
 
@@ -101,8 +101,8 @@ except TokenError as e:
 
 ```bash
 # 環境変数から認証情報を読み込む
-export FORTYTWO_CLIENT_ID=your_client_id
-export FORTYTWO_CLIENT_SECRET=your_client_secret
+export FT_UID=your_client_id
+export FT_SECRET=your_client_secret
 python -m auth42.main
 
 # コマンドライン引数で認証情報を指定
@@ -117,8 +117,8 @@ python -m auth42.main --client-id your_client_id --client-secret your_client_sec
 
 #### オプション
 
-- `--client-id`: 42 APIのクライアントID（環境変数 `FORTYTWO_CLIENT_ID`, `UID`, `CLIENT_ID` からも取得可能）
-- `--client-secret`: 42 APIのクライアントシークレット（環境変数 `FORTYTWO_CLIENT_SECRET`, `SECRET`, `CLIENT_SECRET` からも取得可能）
+- `--client-id`: 42 APIのクライアントID（環境変数 `FT_UID` からも取得可能）
+- `--client-secret`: 42 APIのクライアントシークレット（環境変数 `FT_SECRET` からも取得可能）
 - `--token-file`: トークンファイルのパス（環境変数 `TOKEN_FILE` からも取得可能）
 - `--token-info`: トークン情報を取得して表示
 - `--force-refresh`: 強制的に新しいトークンを取得
