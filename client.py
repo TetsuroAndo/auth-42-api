@@ -100,25 +100,22 @@ class Auth42:
             # エラーハンドリング
             if response.status_code == 400:
                 raise TokenError(
-                    f"リクエストの形式が不正です: {response.text}\n"
-                    "client_id と client_secret が正しいか確認してください。",
+                    "リクエストの形式が不正です。client_id と client_secret が正しいか確認してください。",
                     status_code=400
                 )
             elif response.status_code == 401:
                 raise AuthenticationError(
-                    f"認証に失敗しました: {response.text}\n"
-                    "client_id と client_secret が正しいか確認してください。",
+                    "認証に失敗しました。client_id と client_secret が正しいか確認してください。",
                     status_code=401
                 )
             elif response.status_code == 403:
                 raise AuthorizationError(
-                    f"アクセスが拒否されました: {response.text}\n"
-                    "アプリケーションの権限を確認してください。",
+                    "アクセスが拒否されました。アプリケーションの権限を確認してください。",
                     status_code=403
                 )
             elif not response.ok:
                 raise TokenError(
-                    f"トークン取得に失敗しました (HTTP {response.status_code}): {response.text}",
+                    f"トークン取得に失敗しました (HTTP {response.status_code})",
                     status_code=response.status_code
                 )
 
