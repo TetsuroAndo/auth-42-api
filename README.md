@@ -60,6 +60,13 @@ os.environ["FT_SECRET"] = "your_client_secret"
 auth = Auth42()
 ```
 
+#### .envファイルの読み込みを無効にする
+
+```python
+# .envファイルを読み込まない
+auth = Auth42(load_env=False)
+```
+
 サポートされている環境変数:
 - `FT_UID`: 42 APIのクライアントID
 - `FT_SECRET`: 42 APIのクライアントシークレット

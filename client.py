@@ -8,6 +8,13 @@ import time
 from typing import Optional, Dict, Any
 import requests
 
+# python-dotenvのオプショナルインポート
+try:
+    from dotenv import load_dotenv
+    _HAS_DOTENV = True
+except ImportError:
+    _HAS_DOTENV = False
+
 from .exceptions import TokenError, AuthenticationError, AuthorizationError
 from .token import TokenInfo, TokenManager
 
@@ -29,6 +36,7 @@ class Auth42:
         client_secret: Optional[str] = None,
         token_manager: Optional[TokenManager] = None,
         base_url: Optional[str] = None,
+        load_env: bool = True,
     ):
         """42認証クラスの初期化
 
@@ -37,7 +45,12 @@ class Auth42:
             client_secret: 42 APIのクライアントシークレット（環境変数からも取得可能）
             token_manager: トークンマネージャー（デフォルト: TokenManager()）
             base_url: APIのベースURL（デフォルト: https://api.intra.42.fr）
+            load_env: .envファイルを自動的に読み込むか（デフォルト: True）
         """
+        # .envファイルを読み込む（オプション）
+        if load_env and _HAS_DOTENV:
+            load_dotenv()
+
         self.base_url = base_url or self.BASE_URL
         self.token_manager = token_manager or TokenManager()
 
